@@ -1,10 +1,19 @@
 import "../styles/globals.css";
 import "../styles/theme.css";
+import VideoLoader from '../components/VideoLoader';
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import Script from "next/script";
 
+function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <VideoLoader />
+      <Component {...pageProps} />
+    </>
+  );
+}
 function MyApp({ Component, pageProps }: AppProps) {
   const [mounted, setMounted] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
