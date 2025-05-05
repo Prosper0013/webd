@@ -6,19 +6,10 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import Script from "next/script";
 
-function MyApp({ Component, pageProps }) {
-  return (
-    <>
-      <VideoLoader />
-      <Component {...pageProps} />
-    </>
-  );
-}
 function MyApp({ Component, pageProps }: AppProps) {
   const [mounted, setMounted] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
-  // Ensure the body doesn't overflow and handle client-side only code
   useEffect(() => {
     setMounted(true);
 
@@ -88,6 +79,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="theme-color" content="#f7931a" />
       </Head>
+
+      {/* Video Loader - will automatically disappear when video ends */}
+      <VideoLoader />
 
       {/* Load Google Fonts via next/script to avoid render blocking */}
 
