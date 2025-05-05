@@ -26,7 +26,7 @@ const VideoLoader = () => {
       } else {
         // Window is taller than video (mobile)
         setDimensions({
-          width: 'auto',
+          width: '100%',
           height: '100%'
         });
       }
