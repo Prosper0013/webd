@@ -3,88 +3,60 @@ import { useEffect, useState, useRef } from "react";
 const VideoLoader = () => {
   const [loading, setLoading] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [dimensions, setDimensions] = useState({ 
-    width: '100%', 
-    height: '100%' 
-  });
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Handle responsive sizing
-    const handleResize = () => {
-      const windowRatio = window.innerWidth / window.innerHeight;
-      const videoRatio = video.videoWidth / video.videoHeight;
-      
-      if (windowRatio > videoRatio) {
-        // Window is wider than video (desktop)
-        setDimensions({
-          width: '100%',
-          height: 'auto'
-        });
-      } else {
-        // Window is taller than video (mobile)
-        setDimensions({
-          width: '100%',
-          height: '100%'
-        });
+    // Universal play handler
+    const handlePlay = async () => {
+      try {
+        await video.play();
+      } catch (err) {
+        // If fails, mute and try again
+        video.muted = true;
+        await video.play();
       }
     };
 
-    // Set initial dimensions when metadata loads
-    const handleLoadedMetadata = () => {
-      handleResize();
-      video.play().catch(err => {
-        video.muted = true;
-        video.play();
-      });
-    };
+    // Handle video end
+    const handleEnded = () => setLoading(false);
 
-    video.addEventListener('loadedmetadata', handleLoadedMetadata);
-    window.addEventListener('resize', handleResize);
+    // Set up event listeners
+    video.addEventListener('loadedmetadata', handlePlay);
+    video.addEventListener('ended', handleEnded);
 
-    // Auto-dismiss after 5 seconds (fallback)
-    const timer = setTimeout(() => setLoading(false), 5000);
-    video.addEventListener('ended', () => setLoading(false));
+    // Fallback dismissal after 10 seconds
+    const timer = setTimeout(() => {
+      if (loading) setLoading(false);
+    }, 10000);
 
     return () => {
       clearTimeout(timer);
-      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      window.removeEventListener('resize', handleResize);
-      video.removeEventListener('ended', () => setLoading(false));
+      video.removeEventListener('loadedmetadata', handlePlay);
+      video.removeEventListener('ended', handleEnded);
     };
-  }, []);
+  }, [loading]);
 
   if (!loading) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black overflow-hidden">
+    <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
       <video
         ref={videoRef}
         autoPlay
         muted
         playsInline
         style={{
-          ...dimensions,
-          maxWidth: '100%',
-          maxHeight: '100%',
-          objectFit: 'contain'
+          width: '100%',
+          height: 'auto',
+          maxHeight: '100vh',
+          objectFit: 'cover'
         }}
-        className="transition-opacity duration-300"
       >
         <source src="/welcome.MP4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-
-      {/* Skip button with responsive sizing */}
-      <button 
-        onClick={() => setLoading(false)}
-        className="absolute bottom-6 right-6 bg-white/90 text-black px-4 py-2 rounded-lg z-50
-                   text-sm md:text-base hover:bg-white transition-all"
-      >
-        Skip Intro
-      </button>
     </div>
   );
 };
