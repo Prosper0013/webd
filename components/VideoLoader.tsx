@@ -49,8 +49,6 @@ const VideoLoader = () => {
         playsInline
         style={{
           width: '100%',
-          height: 'auto',
-          objectFit: 'cover'
         }}
       >
         <source src="/welcome.MP4" type="video/mp4" />
