@@ -50,7 +50,6 @@ const VideoLoader = () => {
         style={{
           width: '100%',
           height: 'auto',
-          maxHeight: '100vh',
           objectFit: 'cover'
         }}
       >
