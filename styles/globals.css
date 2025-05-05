@@ -1,0 +1,317 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: pricedown;
+  src: url(/fonts/cavoliniboldfont.ttf);
+  font-display: swap; /* Better font loading */
+}
+
+html {
+  scroll-behavior: auto !important; /* Force disable smooth scrolling */
+  text-size-adjust: 100%; /* Prevent text size adjustments */
+  -webkit-font-smoothing: antialiased; /* Optimize text rendering */
+}
+*{
+scroll-behavior: smooth;
+
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  font-family: pricedown; /* System fonts for better performance */
+  height: 100%;
+  position: relative;
+  overscroll-behavior: none;
+  text-rendering: optimizeSpeed; /* Prioritize rendering speed */
+}
+
+/* Animation performance optimization variables */
+:root {
+  --animation-quality: 1; /* 1 = high quality, 0 = optimized */
+  --animation-speed: 1;  /* Animation speed multiplier */
+  --light-blue: #da6a60;
+  --purple: #9f2844;
+  --blue: #7cd3ee;
+  --black: #323a41;
+  --bg1: #0c0c0c;
+}
+
+/* Performance-optimized animations */
+.optimize-animations * {
+  /* Make animations more efficient during scroll */
+  transition-timing-function: linear !important;
+  animation-timing-function: linear !important;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Better animation control with quality levels */
+.high-quality {
+  --animation-quality: 1; 
+}
+
+.optimized-quality {
+  --animation-quality: 0.7;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Optimize specific animations for performance */
+@keyframes optimized-float {
+  0%, 100% {
+    transform: translateY(0) translateZ(0);
+  }
+  50% {
+    transform: translateY(calc(-10px * var(--animation-quality))) translateZ(0);
+  }
+}
+
+@keyframes optimized-pulse {
+  0%, 100% {
+    transform: scale(1) translateZ(0);
+  }
+  50% {
+    transform: scale(calc(1 + 0.05 * var(--animation-quality))) translateZ(0);
+  }
+}
+
+/* Apply optimized animation classes */
+.animate-float {
+  animation: optimized-float 3s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-pulse {
+  animation: optimized-pulse 2s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Conditional animations using the CSS variable */
+@media screen and (prefers-reduced-motion: no-preference) {
+  .animate-when-enabled {
+    animation-play-state: var(--animation-enabled, running);
+    animation-duration: calc(var(--animation-enabled, 1) * var(--animation-duration, 1s));
+    transition-duration: calc(var(--animation-enabled, 1) * var(--transition-duration, 0.3s));
+  }
+}
+
+/* Completely disable animations when scrolling */
+.disable-animations * {
+  animation-play-state: paused !important;
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* Fix iOS height issues */
+#__next {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Further optimization of section contain */
+section {
+  width: 100%;
+  overflow: clip; /* More performant than overflow: hidden */
+  position: relative;
+  contain: content layout;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+  overscroll-behavior: none;
+  touch-action: pan-y; /* Optimize touch handling */
+}
+
+/* Remove focus outlines in non-keyboard navigation */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Optimize focus outlines */
+*:focus {
+  outline: 2px solid #9b00ff;
+}
+
+/* Optimize scrollbar */
+::-webkit-scrollbar {
+  width: 0px; /* Hide scrollbars completely for performance */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7800ff;
+}
+
+/* Set body with performance hints */
+body {
+  padding: 0;
+  margin: 0;
+  font-family: pricedown;
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+  overflow-y: auto;
+  will-change: scroll-position;
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+}
+
+.active {
+  background: #656873;
+  color: #656873;
+}
+
+/* Completely remove all animations in CSS */
+@media (prefers-reduced-motion: reduce), (max-width: 768px) {
+  *, *::before, *::after {
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .active {
+    color: #2e3336;
+  }
+  
+  body {
+    position: relative;
+    overscroll-behavior-x: none;
+    -webkit-overflow-scrolling: touch;
+    height: -webkit-fill-available; /* iOS height fix */
+  }
+  
+  .content-visibility-section {
+    width: 100%;
+    overflow-x: hidden;
+  }
+  
+  section, div {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .static-element {
+    transform: translateZ(0); /* Promote to its own layer without animations */
+    backface-visibility: hidden;
+  }
+  
+  /* Completely disable content visibility on a11y devices */
+  @media (prefers-reduced-motion: reduce) {
+    section {
+      content-visibility: visible;
+      contain: none;
+    }
+  }
+  
+  /* Optimize and disable fancy effects on mobile */
+  .performance-hidden {
+    display: none !important;
+  }
+  
+  [class*="backdrop-blur"] {
+    backdrop-filter: none !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: #000616;
+  }
+}
+
+.hero {
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Completely removed all animations */
+.hero span {
+  display: none !important;
+}
+
+/* Apply static transforms instead of animations */
+.use-transform {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* Ultra simplified content visibility wrappers */
+.content-visibility-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 500px;
+  contain: content;
+}
+
+/* Helper class to force static rendering */
+.static-element {
+  will-change: auto !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Hide non-critical visual elements in performance mode */
+.performance-hidden {
+  display: none !important;
+}
+
+/* Optimize intersection observer animations */
+.intersection-observer {
+  will-change: transform, opacity;
+  content-visibility: auto;
+}
+
+/* Fix layout shifts during animation loading */
+.animation-placeholder {
+  min-height: 100px;
+}
+
+/* Inline styling values to reduce style calculations */
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.efficient-animation {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  transition-timing-function: linear !important;
+  animation-timing-function: linear !important;
+}
+
+/* Optimize animation transforms */
+[class*="animate-"], .framer-motion {
+  transform: translateZ(0); /* Force GPU */
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+  contain: paint;
+}
+
+/* Override active animations when not in viewport */
+.is-out-of-viewport [class*="animate-"] {
+  animation-play-state: paused;
+}
