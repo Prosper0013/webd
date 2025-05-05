@@ -112,7 +112,6 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
       className="px-6 md:px-20 py-5 relative overflow-hidden"
       style={{
         background: "#085CA6",
-
         backgroundImage: "url('/images/bg2.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "40%",
@@ -150,20 +149,6 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
             <ApologyBadge text="Fast Transaction Times" color="#000" />
             <ApologyBadge text="Coinbase Integration" color="#000" />
           </div>
-
-          {/* <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            className="text-center text-white font-medium text-xl md:text-2xl max-w-3xl mx-auto mb-8"
-          >
-            Join the ultimate Doge community on Base Chain with these simple
-            steps!
-            <span className="block mt-2 font-bold">
-              Experience fast transactions and low fees on the premier Layer 2
-              chain.
-            </span>
-          </motion.p> */}
         </div>
 
         {/* Step cards container */}
@@ -198,7 +183,6 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
                   className="absolute bg-babyBlue -bottom-6 left-1/2 transform -translate-x-1/2 w-12 h-12"
                   style={{
                     clipPath: "polygon(0 0, 100% 0, 50% 100%)",
-                    // backgroundColor: "white",
                     borderLeft: "3px solid #fff",
                     borderRight: "3px solid #fff",
                     borderTop: "3px solid #fff",
@@ -291,6 +275,22 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
               Buy $BDOGE Now
             </motion.button>
           </div>
+
+          {/* Added Uniswap iframe here */}
+          <iframe
+            src="https://app.uniswap.org"
+            height="660px"
+            width="100%"
+            style={{
+              border: "0",
+              margin: "0 auto",
+              marginBottom: "0.5rem",
+              display: "block",
+              borderRadius: "10px",
+              maxWidth: "660px",
+              minWidth: "300px",
+            }}
+          ></iframe>
 
           <p className="mt-6 text-white font-medium text-lg">
             Join our vibrant community on Telegram or Twitter for assistance and
