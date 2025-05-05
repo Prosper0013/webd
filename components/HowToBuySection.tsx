@@ -276,22 +276,6 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
             </motion.button>
           </div>
 
-          {/* Added Uniswap iframe here */}
-          <iframe
-            src="https://app.uniswap.org"
-            height="660px"
-            width="100%"
-            style={{
-              border: "0",
-              margin: "0 auto",
-              marginBottom: "0.5rem",
-              display: "block",
-              borderRadius: "10px",
-              maxWidth: "660px",
-              minWidth: "300px",
-            }}
-          ></iframe>
-
           <p className="mt-6 text-white font-medium text-lg">
             Join our vibrant community on Telegram or Twitter for assistance and
             the latest updates!
