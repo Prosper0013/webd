@@ -277,7 +277,6 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
           </div>
 
           {/* Added Uniswap iframe here */}
-          // In your component file
 <div className="relative w-full max-w-[430px] mx-auto">
   <div className="squid-widget-container">
     <iframe
