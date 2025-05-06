@@ -277,3 +277,4 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
 };
 
 export default HowToBuySection;
+
