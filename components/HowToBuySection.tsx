@@ -8,10 +8,12 @@ import Image from "next/image";
 import { useAnimationPerformance } from "./SafeAnimationProvider";
 import {
   FaTelegram,
+  FaTwitter,
   FaExternalLinkAlt,
   FaCopy,
   FaCheckCircle,
 } from "react-icons/fa";
+
 type HowToBuyStep = {
   step: number;
   title: string;
@@ -27,7 +29,6 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
   const { enableHeavyAnimations } = useAnimationPerformance();
   const [copied, setCopied] = useState(false);
 
-  // Simplified wobble animation
   const wobbleVariants = {
     initial: { rotate: 0 },
     animate: enableHeavyAnimations
@@ -38,10 +39,8 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
       : {},
   };
 
-  // More optimized confetti with fewer particles
   const triggerConfetti = () => {
     if (!enableHeavyAnimations) return;
-
     confetti({
       particleCount: 100,
       spread: 120,
@@ -56,41 +55,14 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
     );
   };
 
-  // Contract Address
   const contractAddress = "0xb3EcbA1330fe26BB36F40344992C481C2c916F23";
 
-  // Copy address to clipboard
   const copyToClipboard = () => {
     navigator.clipboard.writeText(contractAddress).then(() => {
       setCopied(true);
     });
   };
 
-  // Simplified color accents using Base blue
-  const accentColors = [
-    {
-      bg: "rgba(0, 82, 255, 0.15)",
-      glow: "0 8px 24px rgba(0, 82, 255, 0.3)",
-      border: "#085CA6",
-    },
-    {
-      bg: "rgba(0, 82, 255, 0.15)",
-      glow: "0 8px 24px rgba(0, 82, 255, 0.3)",
-      border: "#085CA6",
-    },
-    {
-      bg: "rgba(0, 82, 255, 0.15)",
-      glow: "0 8px 24px rgba(0, 82, 255, 0.3)",
-      border: "#085CA6",
-    },
-    {
-      bg: "rgba(0, 82, 255, 0.15)",
-      glow: "0 8px 24px rgba(0, 82, 255, 0.3)",
-      border: "#085CA6",
-    },
-  ];
-
-  // Simplified bounce animation
   const bounceVariants = {
     initial: { y: 0 },
     animate: enableHeavyAnimations
@@ -117,7 +89,6 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
         backgroundPosition: "40%",
       }}
     >
-      {/* Consistent pattern background */}
       <div className="absolute inset-0 bg-pattern opacity-10"></div>
 
       <motion.div
@@ -151,9 +122,7 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
           </div>
         </div>
 
-        {/* Step cards container */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto relative">
-          {/* Connecting line */}
           <div className="absolute top-1/2 left-0 w-full h-1 bg-white/40 hidden lg:block rounded-full"></div>
 
           {howToBuySteps.map((item, index) => (
@@ -162,23 +131,13 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.3 }}
-              whileHover={
-                enableHeavyAnimations
-                  ? {
-                      scale: 1.03,
-                    }
-                  : {}
-              }
+              whileHover={enableHeavyAnimations ? { scale: 1.03 } : {}}
               className="relative z-10"
             >
-              {/* Card design */}
               <div
                 className="relative bg-babyBlue text-white p-8 pt-14 rounded-standard border-3"
-                style={{
-                  borderColor: "#000",
-                }}
+                style={{ borderColor: "#000" }}
               >
-                {/* Speech bubble pointer */}
                 <div
                   className="absolute bg-babyBlue -bottom-6 left-1/2 transform -translate-x-1/2 w-12 h-12"
                   style={{
@@ -189,7 +148,6 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
                   }}
                 ></div>
 
-                {/* Step number */}
                 <motion.div
                   variants={bounceVariants}
                   initial="initial"
@@ -209,16 +167,14 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
                   <h3 className="text-2xl font-bold mb-3 text-white">
                     {item.title}
                   </h3>
-
-                  {/* Divider */}
                   <div className="h-1 w-12 mx-auto mb-4 rounded-full bg-white"></div>
-
                   <p className="text-white font-medium">{item.description}</p>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
+
         <motion.div
           className="mt-12 w-full max-w-sm"
           initial={{ opacity: 0 }}
@@ -230,7 +186,7 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
               Contract Address:
             </p>
             <div className="flex items-center justify-between w-full">
-              <span className="text-xs text-[0.65rem] md:text-xs text-white  break-all w-full ">
+              <span className="text-xs text-[0.65rem] md:text-xs text-white break-all w-full">
                 {contractAddress}
               </span>
               <motion.button
@@ -249,37 +205,48 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
             </div>
           </div>
         </motion.div>
+
         {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="mt-5 text-center"
+          className="mt-8 text-center"
         >
-          <div className="relative inline-block">
-            <motion.button
-              whileHover={
-                enableHeavyAnimations
-                  ? {
-                      scale: 1.03,
-                    }
-                  : {}
-              }
-              whileTap={{ scale: 0.98 }}
-              onClick={triggerConfetti}
-              className="text-2xl md:text-3xl px-10 py-5 font-bold rounded-button bg-babyBlue text-white"
-              style={{
-                border: "3px solid #fff",
-              }}
-            >
-              Buy $BDOGE Now
-            </motion.button>
-          </div>
+          <motion.button
+            whileHover={enableHeavyAnimations ? { scale: 1.03 } : {}}
+            whileTap={{ scale: 0.98 }}
+            onClick={triggerConfetti}
+            className="text-2xl md:text-3xl px-10 py-5 font-bold rounded-button bg-babyBlue text-white"
+            style={{ border: "3px solid #fff" }}
+          >
+            Buy $BDOGE Now
+          </motion.button>
 
           <p className="mt-6 text-white font-medium text-lg">
             Join our vibrant community on Telegram or Twitter for assistance and
             the latest updates!
           </p>
+
+          {/* Social Links */}
+          <div className="flex justify-center gap-4 mt-4">
+            <a
+              href="https://t.me/baseddogeportal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 border border-white text-white rounded-md hover:bg-white hover:text-blue-700 transition"
+            >
+              <FaTelegram /> Telegram
+            </a>
+            <a
+              href="https://x.com/BasedDogeOnBase"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 border border-white text-white rounded-md hover:bg-white hover:text-blue-700 transition"
+            >
+              <FaTwitter /> Twitter
+            </a>
+          </div>
         </motion.div>
       </motion.div>
     </section>
