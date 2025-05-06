@@ -189,7 +189,7 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
                   }}
                 ></div>
 
-                {/* Step number */}
+                {/* Step number*/}
                 <motion.div
                   variants={bounceVariants}
                   initial="initial"
