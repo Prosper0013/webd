@@ -276,7 +276,7 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
             </motion.button>
           </div>
 
-{/* Added Uniswap iframe here updated */}
+{/* Added Uniswap iframe here updated 
 <div className="relative w-full max-w-[430px] mx-auto">
   <div className="squid-widget-container">
     <iframe
@@ -295,7 +295,7 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
       sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
     ></iframe>
   </div>
-</div>
+</div>*/}
 
           <p className="mt-6 text-white font-medium text-lg">
             Join our vibrant community on Telegram or Twitter for assistance and
