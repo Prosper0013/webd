@@ -24,6 +24,7 @@ interface HowToBuySectionProps {
   howToBuySteps: HowToBuyStep[];
 }
 
+
 const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
   const { enableHeavyAnimations } = useAnimationPerformance();
   const [copied, setCopied] = useState(false);
