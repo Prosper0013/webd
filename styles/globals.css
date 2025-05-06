@@ -42,6 +42,17 @@ html, body {
   --bg1: #0c0c0c;
 }
 
+/* Add this to your global CSS */
+.squid-widget-container {
+  background-color: rgb(8, 92, 166);
+  border-radius: 16px;
+  padding: 1px; /* Helps contain the iframe */
+}
+
+.squid-widget-container iframe {
+  background-color: transparent !important;
+}
+
 /* Performance-optimized animations */
 .optimize-animations * {
   /* Make animations more efficient during scroll */
