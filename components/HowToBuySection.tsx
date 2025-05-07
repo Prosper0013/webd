@@ -300,16 +300,16 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
           {/* Added Uniswap iframe here */}
           <iframe
             src="https://app.uniswap.org/swap?chain=base&inputCurrency=NATIVE&outputCurrency=0xb3ecba1330fe26bb36f40344992c481c2c916f23"
-            height="660px"
+            height="684px"
             width="100%"
             style={{
-              border: "0",
-              margin: "0 auto",
-              marginBottom: "0.5rem",
-              display: "block",
-              borderRadius: "10px",
-              maxWidth: "660px",
+              border: "none",
+              borderRadius: "16px",
+              backgroundColor: "rgb(8, 92, 166)", // Force background color
               minWidth: "300px",
+              maxWidth: "430px",
+              margin: "0 auto",
+              display: "block"
             }}
           ></iframe>
           
