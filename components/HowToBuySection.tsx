@@ -117,7 +117,7 @@ const HowToBuySection: React.FC<HowToBuySectionProps> = ({ howToBuySteps }) => {
         backgroundPosition: "40%",
       }}
     >
-      {/* Consistent pattern background */}
+      {/* Consistent pattern background*/}
       <div className="absolute inset-0 bg-pattern opacity-10"></div>
 
       <motion.div
